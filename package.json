@@ -1,4 +1,8 @@
 {
+  "author": "Simon Repp <simon@fdpl.io>",
+  "bugs": {
+    "url": "https://github.com/eno-lang/vscode-eno/issues/"
+  },
   "categories": [
     "Languages"
   ],
@@ -25,8 +29,13 @@
     "notation",
     "language"
   ],
+  "homepage": "https://eno-lang.org/plugins/",
   "license": "MIT",
   "name": "vscode-eno",
   "publisher": "eno-lang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eno-lang/vscode-eno.git"
+  },
   "version": "0.1.0"
 }
