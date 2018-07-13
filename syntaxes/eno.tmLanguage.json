@@ -1,0 +1,313 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "eno",
+	"patterns": [
+		{ "include": "#comment" },
+		{ "include": "#name" },
+		{ "include": "#field" },
+		{ "include": "#item" },
+		{ "include": "#entry" },
+		{ "include": "#block" },	
+		{ "include": "#continuation" },
+		{ "include": "#section1" },
+		{ "include": "#section2" },
+		{ "include": "#section3" },
+		{ "include": "#section4" },
+		{ "include": "#section5" },
+		{ "include": "#section6" },
+		{ "include": "#copy" },
+		{ "include": "#escapedName" },
+		{ "include": "#escapedField" },
+		{ "include": "#escapedEntry" },
+		{ "include": "#escapedSection1" },
+		{ "include": "#escapedSection2" },
+		{ "include": "#escapedSection3" },
+		{ "include": "#escapedSection4" },
+		{ "include": "#escapedSection5" },
+		{ "include": "#escapedSection6" },
+		{ "include": "#escapedCopy" },
+		{	"include": "#illegal" }
+	],
+	"repository": {
+		"block": {
+			"comment": "-- name",
+			"begin": "^\\s*(-{2,})(?!-)\\s*(.+?)\\s*$",
+			"beginCaptures": {
+				"1": { "name": "punctuation.block.begin.operator.eno" },
+				"2": { "name": "variable.other.block.name.eno" }
+			},
+			"contentName": "value.eno",
+			"end": "^\\s*(\\1)\\s*(\\2)\\s*$",
+			"endCaptures": {
+				"1": { "name": "punctuation.block.end.operator.eno" },
+				"2": { "name": "variable.other.block.name.eno" }
+			},
+			"patterns": []
+		},
+		"comment": {
+			"comment": "> comment",
+			"match": "^\\s*(>).*$",
+			"name": "comment.line.eno",
+			"captures": {
+				"1": { "name": "punctuation.comment.operator.eno" }
+			},
+			"patterns": []
+		},
+		"continuation": {
+			"comment": "| value OR \\ value",
+			"match": "^\\s*([\\\\|])(?![\\\\|])\\s*(.+?)?\\s*$",
+			"captures": {
+				"1": { "name": "punctuation.continuation.operator.eno" },
+				"2": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"copy": {
+			"comment": "name < template",
+			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(<)\\s*(\\S.*?)\\s*$",
+			"captures": {
+				"1": { "name": "variable.other.name.eno" },
+				"2": { "name": "punctuation.copy.operator.eno" },
+				"3": { "name": "variable.other.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"entry": {
+			"comment": "name = value",
+			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(=)\\s*(.+?)?\\s*$",
+			"captures": {
+				"1": { "name": "variable.other.entry.name.eno" },
+				"2": { "name": "punctuation.entry.operator.eno" },
+				"3": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"escapedCopy": {
+			"comment": "name < template",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(<)\\s*(\\S.*?)\\s*$",
+			"captures": {
+				"1": { "name": "punctuation.escape.begin.operator.eno" },
+				"2": { "name": "variable.other.name.eno" },
+				"3": { "name": "punctuation.escape.end.operator.eno" },
+				"4": { "name": "punctuation.copy.operator.eno" },
+				"5": { "name": "variable.other.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"escapedEntry": {
+			"comment": "`name` = value",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(=)\\s*(.+?)?\\s*$",
+			"captures": {
+				"1": { "name": "punctuation.escape.begin.operator.eno" },
+				"2": { "name": "variable.other.entry.name.eno" },
+				"3": { "name": "punctuation.escape.end.operator.eno" },
+				"4": { "name": "punctuation.entry.operator.eno" },
+				"5": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"escapedField": {
+			"comment": "`name`: value",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*(\\S.*?)\\s*$",
+			"captures": {
+				"1": { "name": "punctuation.escape.begin.operator.eno" },
+				"2": { "name": "variable.other.name.eno" },
+				"3": { "name": "punctuation.escape.end.operator.eno" },
+				"4": { "name": "punctuation.name.operator.eno" },
+				"5": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"escapedName": {
+			"comment": "`name`:",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*$",
+			"captures": {
+				"1": { "name": "punctuation.escape.begin.operator.eno" },
+				"2": { "name": "variable.other.name.eno" },
+				"3": { "name": "punctuation.escape.end.operator.eno" },
+				"4": { "name": "punctuation.name.operator.eno" }
+			},
+			"patterns": []
+		},
+		"escapedSection1": {
+			"comment": "# `section` [[<]< section]",
+			"match": "^\\s*(#)(?!#)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section1.operator.eno" },
+				"2": { "name": "punctuation.section1.escape.begin.operator.eno" },
+				"3": { "name": "variable.other.section1.name.eno" },
+				"4": { "name": "punctuation.section1.escape.end.operator.eno" },
+				"5": { "name": "punctuation.section1.copy.operator.eno" },
+				"6": { "name": "variable.other.section1.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"escapedSection2": {
+			"comment": "## `section` [[<]< section]",
+			"match": "^\\s*(##)(?!#)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section2.operator.eno" },
+				"2": { "name": "punctuation.section2.escape.begin.operator.eno" },
+				"3": { "name": "variable.other.section2.name.eno" },
+				"4": { "name": "punctuation.section2.escape.end.operator.eno" },
+				"5": { "name": "punctuation.section2.copy.operator.eno" },
+				"6": { "name": "variable.other.section2.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"escapedSection3": {
+			"comment": "### `section` [[<]< section]",
+			"match": "^\\s*(###)(?!#)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section3.operator.eno" },
+				"2": { "name": "punctuation.section3.escape.begin.operator.eno" },
+				"3": { "name": "variable.other.section3.name.eno" },
+				"4": { "name": "punctuation.section3.escape.end.operator.eno" },
+				"5": { "name": "punctuation.section3.copy.operator.eno" },
+				"6": { "name": "variable.other.section3.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"escapedSection4": {
+			"comment": "#### `section` [[<]< section]",
+			"match": "^\\s*(####)(?!#)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section4.operator.eno" },
+				"2": { "name": "punctuation.section4.escape.begin.operator.eno" },
+				"3": { "name": "variable.other.section4.name.eno" },
+				"4": { "name": "punctuation.section4.escape.end.operator.eno" },
+				"5": { "name": "punctuation.section4.copy.operator.eno" },
+				"6": { "name": "variable.other.section4.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"escapedSection5": {
+			"comment": "##### `section` [[<]< section]",
+			"match": "^\\s*(#####)(?!#)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section5.operator.eno" },
+				"2": { "name": "punctuation.section5.escape.begin.operator.eno" },
+				"3": { "name": "variable.other.section5.name.eno" },
+				"4": { "name": "punctuation.section5.escape.end.operator.eno" },
+				"5": { "name": "punctuation.section5.copy.operator.eno" },
+				"6": { "name": "variable.other.section5.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"escapedSection6": {
+			"comment": "###### `section` [[<]< section]",
+			"match": "^\\s*(#{6,})(?!#)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section6.operator.eno" },
+				"2": { "name": "punctuation.section6.escape.begin.operator.eno" },
+				"3": { "name": "variable.other.section6.name.eno" },
+				"4": { "name": "punctuation.section6.escape.end.operator.eno" },
+				"5": { "name": "punctuation.section6.copy.operator.eno" },
+				"6": { "name": "variable.other.section6.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"field": {
+			"comment": "name: value",
+			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(:)\\s*(\\S.*?)\\s*$",
+			"captures": {
+				"1": { "name": "variable.other.name.eno" },
+				"2": { "name": "punctuation.name.operator.eno" },
+				"3": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"illegal": {
+			"match": "^\\s*(\\S.*+)\\s*$",
+			"captures": {
+				"1": { "name": "invalid.illegal.unspecified.eno" }
+			},
+			"patterns": []
+		},
+		"item": {
+			"comment": "- value",
+			"match": "^\\s*(-)(?!-)\\s*(.+?)?\\s*$",
+			"captures": {
+				"1": { "name": "punctuation.item.operator.eno" },
+				"2": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"name": {
+			"comment": "name:",
+			"match": "^\\s*(?![>\\-#=:*\\\\|`])([^<=:]+?)\\s*(:)\\s*$",
+			"captures": {
+				"1": { "name": "variable.other.name.eno" },
+				"2": { "name": "punctuation.name.operator.eno" }
+			},
+			"patterns": []
+		},
+		"section1": {
+			"comment": "# section [[<]< section]",
+			"match": "^\\s*(#)(?!#)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section1.operator.eno" },
+				"2": { "name": "variable.other.section1.name.eno" },
+				"3": { "name": "punctuation.section1.copy.operator.eno" },
+				"4": { "name": "variable.other.section1.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"section2": {
+			"comment": "## section [[<]< section]",
+			"match": "^\\s*(##)(?!#)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section2.operator.eno" },
+				"2": { "name": "variable.other.section2.name.eno" },
+				"3": { "name": "punctuation.section2.copy.operator.eno" },
+				"4": { "name": "variable.other.section2.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"section3": {
+			"comment": "### section [[<]< section]",
+			"match": "^\\s*(###)(?!#)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section3.operator.eno" },
+				"2": { "name": "variable.other.section3.name.eno" },
+				"3": { "name": "punctuation.section3.copy.operator.eno" },
+				"4": { "name": "variable.other.section3.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"section4": {
+			"comment": "#### section [[<]< section]",
+			"match": "^\\s*(####)(?!#)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section4.operator.eno" },
+				"2": { "name": "variable.other.section4.name.eno" },
+				"3": { "name": "punctuation.section4.copy.operator.eno" },
+				"4": { "name": "variable.other.section4.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"section5": {
+			"comment": "##### section [[<]< section]",
+			"match": "^\\s*(#####)(?!#)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section5.operator.eno" },
+				"2": { "name": "variable.other.section5.name.eno" },
+				"3": { "name": "punctuation.section5.copy.operator.eno" },
+				"4": { "name": "variable.other.section5.template.name.eno" }
+			},
+			"patterns": []
+		},
+		"section6": {
+			"comment": "###### section [[<]< section]",
+			"match": "^\\s*(#{6,})(?!#)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
+			"captures": {
+				"1": { "name": "punctuation.section6.operator.eno" },
+				"2": { "name": "variable.other.section6.name.eno" },
+				"3": { "name": "punctuation.section6.copy.operator.eno" },
+				"4": { "name": "variable.other.section6.template.name.eno" }
+			},
+			"patterns": []
+		}
+	},
+	"scopeName": "text.eno"
+}

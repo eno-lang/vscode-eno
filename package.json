@@ -1,0 +1,32 @@
+{
+  "categories": [
+    "Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "eno",
+      "aliases": ["eno"],
+      "extensions": [".eno"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "eno",
+      "scopeName": "text.eno",
+      "path": "./syntaxes/eno.tmLanguage.json"
+    }]
+  },
+  "description": "eno language support in Visual Studio Code",
+  "displayName": "vscode-eno",
+  "engines": {
+    "vscode": "^1.25.0"
+  },
+  "keywords": [
+    "eno",
+    "notation",
+    "language"
+  ],
+  "license": "MIT",
+  "name": "vscode-eno",
+  "publisher": "eno-lang",
+  "version": "0.0.0"
+}
