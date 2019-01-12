@@ -4,12 +4,12 @@
     "url": "https://github.com/eno-lang/vscode-eno/issues/"
   },
   "categories": [
-    "Languages"
+    "Programming Languages"
   ],
   "contributes": {
     "languages": [{
       "id": "eno",
-      "aliases": ["eno"],
+      "aliases": ["Eno"],
       "extensions": [".eno"],
       "configuration": "./language-configuration.json"
     }],
