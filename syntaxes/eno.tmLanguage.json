@@ -3,15 +3,15 @@
 	"name": "eno",
 	"patterns": [
 		{ "include": "#comment" },
-		{ "include": "#name" },
+		{ "include": "#element" },
 		{ "include": "#field" },
 		{ "include": "#listItem" },
 		{ "include": "#fieldsetEntry" },
-		{ "include": "#block" },
+		{ "include": "#multilineField" },
 		{ "include": "#continuation" },
 		{ "include": "#section" },
 		{ "include": "#copy" },
-		{ "include": "#escapedName" },
+		{ "include": "#escapedElement" },
 		{ "include": "#escapedField" },
 		{ "include": "#escapedFieldsetEntry" },
 		{ "include": "#escapedSection" },
@@ -19,21 +19,6 @@
 		{ "include": "#illegal" }
 	],
 	"repository": {
-		"block": {
-			"comment": "-- name",
-			"begin": "^\\s*(-{2,})(?!-)\\s*(.+?)\\s*$",
-			"beginCaptures": {
-				"1": { "name": "entity.name.function.operator.block.eno" },
-				"2": { "name": "keyword.name.block.eno" }
-			},
-			"contentName": "value.eno",
-			"end": "^\\s*(\\1)\\s*(\\2)\\s*$",
-			"endCaptures": {
-				"1": { "name": "entity.name.function.operator.block.eno" },
-				"2": { "name": "keyword.name.block.eno" }
-			},
-			"patterns": []
-		},
 		"comment": {
 			"comment": "> comment",
 			"match": "^\\s*(>).*$",
@@ -53,7 +38,7 @@
 			"patterns": []
 		},
 		"copy": {
-			"comment": "name < template",
+			"comment": "copy < template",
 			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(<)\\s*(\\S.*?)\\s*$",
 			"captures": {
 				"1": { "name": "keyword.name.element.eno" },
@@ -62,18 +47,17 @@
 			},
 			"patterns": []
 		},
-		"fieldsetEntry": {
-			"comment": "name = value",
-			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(=)\\s*(.+?)?\\s*$",
+		"element": {
+			"comment": "element:",
+			"match": "^\\s*(?![>\\-#=:*\\\\|`])([^<=:]+?)\\s*(:)\\s*$",
 			"captures": {
-				"1": { "name": "entity.other.attribute-name.fieldset-entry.eno" },
-				"2": { "name": "entity.name.function.operator.fieldset-entry.eno" },
-				"3": { "name": "value.eno" }
+				"1": { "name": "keyword.name.element.eno" },
+				"2": { "name": "entity.name.function.operator.element.eno" }
 			},
 			"patterns": []
 		},
 		"escapedCopy": {
-			"comment": "`name` < template",
+			"comment": "`copy` < template",
 			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(<)\\s*(\\S.*?)\\s*$",
 			"captures": {
 				"1": { "name": "entity.name.function.operator.escape.begin.eno" },
@@ -84,8 +68,31 @@
 			},
 			"patterns": []
 		},
+		"escapedElement": {
+			"comment": "`element`:",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*$",
+			"captures": {
+				"1": { "name": "entity.name.function.operator.escape.begin.eno" },
+				"2": { "name": "keyword.name.element.eno" },
+				"3": { "name": "entity.name.function.operator.escape.end.eno" },
+				"4": { "name": "entity.name.function.operator.element.eno" }
+			},
+			"patterns": []
+		},
+		"escapedField": {
+			"comment": "`field`: value",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*(\\S.*?)\\s*$",
+			"captures": {
+				"1": { "name": "entity.name.function.operator.escape.begin.eno" },
+				"2": { "name": "keyword.name.field.eno" },
+				"3": { "name": "entity.name.function.operator.escape.end.eno" },
+				"4": { "name": "entity.name.function.operator.element.eno" },
+				"5": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
 		"escapedFieldsetEntry": {
-			"comment": "`name` = value",
+			"comment": "`entry` = value",
 			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(=)\\s*(.+?)?\\s*$",
 			"captures": {
 				"1": { "name": "entity.name.function.operator.escape.begin.eno" },
@@ -96,31 +103,8 @@
 			},
 			"patterns": []
 		},
-		"escapedField": {
-			"comment": "`name`: value",
-			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*(\\S.*?)\\s*$",
-			"captures": {
-				"1": { "name": "entity.name.function.operator.escape.begin.eno" },
-				"2": { "name": "keyword.name.field.eno" },
-				"3": { "name": "entity.name.function.operator.escape.end.eno" },
-				"4": { "name": "entity.name.function.operator.name.eno" },
-				"5": { "name": "value.eno" }
-			},
-			"patterns": []
-		},
-		"escapedName": {
-			"comment": "`name`:",
-			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*$",
-			"captures": {
-				"1": { "name": "entity.name.function.operator.escape.begin.eno" },
-				"2": { "name": "keyword.name.element.eno" },
-				"3": { "name": "entity.name.function.operator.escape.end.eno" },
-				"4": { "name": "entity.name.function.operator.name.eno" }
-			},
-			"patterns": []
-		},
 		"escapedSection": {
-			"comment": "# `section` [[<]< section]",
+			"comment": "# `section` [[<]< template]",
 			"match": "^\\s*+(#++)\\s*(`+)\\s*((?:(?!\\2).)+)\\s*(\\2)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
 			"captures": {
 				"1": { "name": "storage.type.section.eno" },
@@ -133,11 +117,21 @@
 			"patterns": []
 		},
 		"field": {
-			"comment": "name: value",
+			"comment": "field: value",
 			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(:)\\s*(\\S.*?)\\s*$",
 			"captures": {
 				"1": { "name": "keyword.name.field.eno" },
-				"2": { "name": "entity.name.function.operator.name.eno" },
+				"2": { "name": "entity.name.function.operator.element.eno" },
+				"3": { "name": "value.eno" }
+			},
+			"patterns": []
+		},
+		"fieldsetEntry": {
+			"comment": "entry = value",
+			"match": "^\\s*(?![>\\-#\\\\|`])([^<=:]+?)\\s*(=)\\s*(.+?)?\\s*$",
+			"captures": {
+				"1": { "name": "entity.other.attribute-name.fieldset-entry.eno" },
+				"2": { "name": "entity.name.function.operator.fieldset-entry.eno" },
 				"3": { "name": "value.eno" }
 			},
 			"patterns": []
@@ -150,7 +144,7 @@
 			"patterns": []
 		},
 		"listItem": {
-			"comment": "- value",
+			"comment": "- item",
 			"match": "^\\s*(-)(?!-)\\s*(.+?)?\\s*$",
 			"captures": {
 				"1": { "name": "entity.name.function.operator.list-item.eno" },
@@ -158,17 +152,23 @@
 			},
 			"patterns": []
 		},
-		"name": {
-			"comment": "name:",
-			"match": "^\\s*(?![>\\-#=:*\\\\|`])([^<=:]+?)\\s*(:)\\s*$",
-			"captures": {
-				"1": { "name": "keyword.name.element.eno" },
-				"2": { "name": "entity.name.function.operator.name.eno" }
+		"multilineField": {
+			"comment": "-- multiline field",
+			"begin": "^\\s*(-{2,})(?!-)\\s*(.+?)\\s*$",
+			"beginCaptures": {
+				"1": { "name": "entity.name.function.operator.multiline-field.eno" },
+				"2": { "name": "keyword.name.multiline-field.eno" }
+			},
+			"contentName": "value.eno",
+			"end": "^\\s*(\\1)\\s*(\\2)\\s*$",
+			"endCaptures": {
+				"1": { "name": "entity.name.function.operator.multiline-field.eno" },
+				"2": { "name": "keyword.name.multiline-field.eno" }
 			},
 			"patterns": []
 		},
 		"section": {
-			"comment": "# section [[<]< section]",
+			"comment": "# section [[<]< template]",
 			"match": "^\\s*+(#++)\\s*([^\\s<`][^<]*?)\\s*(?:(<(?!<)|<<)\\s*(\\S.*?)\\s*)?$",
 			"captures": {
 				"1": { "name": "storage.type.section.eno" },
