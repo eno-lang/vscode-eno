@@ -29,7 +29,7 @@
     "notation",
     "language"
   ],
-  "homepage": "https://eno-lang.org/plugins/",
+  "homepage": "https://eno-lang.org/",
   "license": "MIT",
   "name": "vscode-eno",
   "publisher": "eno-lang",
