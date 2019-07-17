@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Adapt grammar to support empties `92795e4`
+
 ## 0.3.0
 
 - Visually distinguish section keys, equally highlight all operators `d912f4d`
