@@ -48,8 +48,8 @@
 			"patterns": []
 		},
 		"element": {
-			"comment": "element:",
-			"match": "^\\s*(?![>\\-#=:*\\\\|`])([^<=:]+?)\\s*(:)\\s*$",
+			"comment": "element[:]",
+			"match": "^\\s*(?![>\\-#=:*\\\\|`])([^<=:]+?)\\s*(:)?\\s*$",
 			"captures": {
 				"1": { "name": "entity.name.tag.element.eno" },
 				"2": { "name": "keyword.operator.element.eno" }
@@ -69,8 +69,8 @@
 			"patterns": []
 		},
 		"escapedElement": {
-			"comment": "`element`:",
-			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)\\s*$",
+			"comment": "`element`[:]",
+			"match": "^\\s*(`+)\\s*((?:(?!\\1).)+)\\s*(\\1)\\s*(:)?\\s*$",
 			"captures": {
 				"1": { "name": "keyword.operator.escape.begin.eno" },
 				"2": { "name": "entity.name.tag.element.eno" },
