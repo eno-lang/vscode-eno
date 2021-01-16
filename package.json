@@ -19,7 +19,7 @@
       "path": "./syntaxes/eno.tmLanguage.json"
     }]
   },
-  "description": "eno language support in Visual Studio Code",
+  "description": "Eno language support in Visual Studio Code",
   "displayName": "vscode-eno",
   "engines": {
     "vscode": "^1.25.0"
