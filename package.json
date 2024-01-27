@@ -1,41 +1,26 @@
 {
-  "author": "Simon Repp <simon@fdpl.io>",
-  "bugs": {
-    "url": "https://github.com/eno-lang/vscode-eno/issues/"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "contributes": {
-    "languages": [{
-      "id": "eno",
-      "aliases": ["Eno"],
-      "extensions": [".eno"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "eno",
-      "scopeName": "text.eno",
-      "path": "./syntaxes/eno.tmLanguage.json"
-    }]
-  },
-  "description": "Eno language support in Visual Studio Code",
-  "displayName": "vscode-eno",
-  "engines": {
-    "vscode": "^1.25.0"
-  },
-  "keywords": [
-    "eno",
-    "notation",
-    "language"
-  ],
-  "homepage": "https://eno-lang.org/",
-  "license": "MIT",
-  "name": "vscode-eno",
-  "publisher": "eno-lang",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eno-lang/vscode-eno.git"
-  },
-  "version": "0.4.0"
+    "author": "Simon Repp",
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "eno",
+            "aliases": ["Eno"],
+            "extensions": [".eno"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "eno",
+            "scopeName": "text.eno",
+            "path": "./syntaxes/eno.tmLanguage.json"
+        }]
+    },
+    "description": "Eno language support in Visual Studio Code",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "name": "vscode-eno",
+    "publisher": "eno-lang",
+    "version": "0.4.0"
 }
