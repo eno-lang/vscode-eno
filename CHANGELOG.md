@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+- Adjust syntax definition for latest language specification and terminology `ab6792c`
+
 ## 0.4.0
 
 - Adapt grammar to support empties `92795e4`
